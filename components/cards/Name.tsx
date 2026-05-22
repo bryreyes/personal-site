@@ -1,9 +1,7 @@
-import { ReactNode } from "react";
-
 const tags = [
   "Open to Work",
-  "Tag Two",
-  "Tag Three",
+  "Placeholder Tag",
+  "Placeholder Tag 2",
 ];
 
 export default function Name() {
@@ -13,7 +11,7 @@ export default function Name() {
       style={{ minHeight: "220px" }}
     >
       <div>
-        <p className="text-sm text-text-secondary mb-1">Hey, I'm</p>
+        <p className="text-sm text-text-secondary mb-1">Hey, I&apos;m</p>
         <h1 className="text-4xl font-bold text-text-primary mb-3">
           Bryson Reyes<span className="text-accent animate-pulse">|</span>
         </h1>
