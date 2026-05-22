@@ -1,5 +1,4 @@
-import Name from "@/components/cards/Name";
-import Links from "@/components/cards/Links";
+import { Name, Links } from "@/components/cards";
 
 export default function Home() {
   return (
