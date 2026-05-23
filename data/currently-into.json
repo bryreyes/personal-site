@@ -1,0 +1,8 @@
+{
+  "items": [
+    { "label": "Currently Reading", "title": "The Name of the Wind", "subtitle": "Patrick Rothfuss" },
+    { "label": "Recently Watched", "title": "The Imitation Game", "subtitle": "Platform" },
+    { "label": "Currently Building", "title": "This website", "subtitle": "Suggestions welcome" },
+    { "label": "Recently Learned", "title": "Filler", "subtitle": "Context" }
+  ]
+}
