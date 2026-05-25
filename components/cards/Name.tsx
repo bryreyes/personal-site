@@ -1,6 +1,6 @@
 const tags = [
-  "Open to Work",
-  "Placeholder Tag",
+  "CS Grad",
+  "Placeholder, I dont like having empty space here but its hard to put something here the site doesnt already show",
   "Placeholder Tag 2",
 ];
 
@@ -13,11 +13,10 @@ export default function Name() {
       <div>
         <p className="text-sm text-text-secondary mb-1">Hey, I&apos;m</p>
         <h1 className="text-4xl font-bold text-text-primary mb-3">
-          Bryson Reyes<span className="text-accent animate-pulse">|</span>
+          Bryson<span className="text-accent animate-pulse">|</span>
         </h1>
         <p className="text-text-secondary text-sm leading-relaxed">
-          {/* Bio goes here */}
-          CS grad based in San Diego. I build things and collect keyboards.
+          I build things and collect keyboards. I use this site to show off a bit about me and my work.
         </p>
       </div>
 

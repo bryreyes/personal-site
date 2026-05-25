@@ -1,0 +1,32 @@
+import { FiExternalLink } from "react-icons/fi";
+import data from "@/data/projects.json";
+
+export default function Projects() {
+  return (
+    <div className="rounded-xl border border-card-border bg-card p-6 flex flex-col gap-4">
+      {data.projects.map((project) => (
+        <div key={project.name} className="flex flex-col gap-1">
+          <div className="flex items-center justify-between">
+            <span className="text-sm font-medium text-text-primary">{project.name}</span>
+            <div className="flex items-center gap-2">
+              <span className={`text-xs px-2 py-0.5 rounded-full ${
+                project.status === "Live!"
+                  ? "bg-accent-bg text-accent border border-accent-dark"
+                  : "bg-card border border-card-border text-text-secondary"
+              }`}>
+                {project.status}
+              </span>
+              <a href={project.url} target="_blank" rel="noopener noreferrer">
+                <FiExternalLink size={14} className="text-text-dim hover:text-accent transition-colors" />
+              </a>
+            </div>
+          </div>
+          <p className="text-xs text-text-secondary">{project.description}</p>
+        </div>
+      ))}
+      <a href="#" className="text-xs text-text-dim hover:text-accent transition-colors mt-auto">
+        see all projects:
+      </a>
+    </div>
+  );
+}
