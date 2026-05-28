@@ -16,7 +16,7 @@ export default function Name() {
           Bryson<span className="text-accent animate-pulse">|</span>
         </h1>
         <p className="text-text-secondary text-sm leading-relaxed">
-          I build things and collect keyboards. I use this site to show off a bit about me and my work.
+          I build things and collect keyboards. I use this site to show off a bit about me and my work; feel free to click around and explore!
         </p>
       </div>
 

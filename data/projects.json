@@ -1,7 +1,7 @@
 {
   "projects": [
     { "name": "Fruit Fly Behavioral Tracking System", "description": "Automated fruit fly behavioral analysis for genetics research through computer vision", "status": "Completed", "url": "Not live: Demo soon!" },
-    { "name": "Spotify Playlist Commit Graph", "description": "Visualizes collaborative playlist activity as a GitHub-style contribution graph", "status": "Live", "url": "https://playlist-commits.vercel.app/" },
+    { "name": "Spotify Playlist Commit Graph", "description": "Visualizes collaborative playlist additions as a GitHub-style contribution graph", "status": "Live", "url": "https://playlist-commits.vercel.app/" },
     { "name": "LLM Cloud Deployment & Cost Benchmarking", "description": "Benchmarked CPU-only DeepSeek-R1 inference on GKE across instance types to quantify real-world throughput, latency, and cost per 1,000 tokens", "status": "Completed", "url": "Not live" }
   ]
 }

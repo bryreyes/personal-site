@@ -25,7 +25,7 @@ export default function Projects() {
         </div>
       ))}
       <a href="#" className="text-xs text-text-dim hover:text-accent transition-colors mt-auto">
-        see all projects:
+        see all projects
       </a>
     </div>
   );
