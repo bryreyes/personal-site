@@ -1,12 +1,15 @@
 {
   "current": {
     "name": "Geon F1-8X V2",
+    "color": "Silver/Grey WK",
+    "plate": "Alu Plate",
     "layout": "TKL",
-    "switch": "Cherry Nixie",
-    "plate": "Polypropylene",
+    "stabs": "Owlstabs V2",
     "keycaps": "GMK BoW",
-    "mods": "Krytox205g0 | Spring swap 22mm 62.5g | Krytox105g0",
-    "sound": "Clacky/Scratchy?",
+    "switch": "Nixies | Krytox205g0",
+    "springs": "Geon 22m 57.5g Triple-Stage | Krytox105g0",
+    "mods": "Foamless",
+    "sound": "Clacky/Scratchy",
     "date": "2025",
     "photos": []
   }
