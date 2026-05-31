@@ -51,6 +51,16 @@ export default function ProjectsPage() {
               </div>
             </div>
             <p className="text-xs text-text-secondary">{project.description}</p>
+            <div className="flex flex-wrap gap-2 mt-1">
+              {project.stack.map((tech) => (
+                <span
+                  key={tech}
+                  className="text-xs px-2 py-0.5 rounded-full bg-accent-bg text-text-secondary border border-card-border"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
           </div>
         ))}
       </div>
