@@ -22,7 +22,7 @@ const F_ROW_GROUP_GAP = KEY_UNIT * 0.6;
 // proportional scaling
 const KEY_RADIUS = KEY_UNIT * 0.12;
 const KEY_STROKE = KEY_UNIT * 0.04;
-const LEGEND_SIZE = KEY_UNIT * 0.30;
+const LEGEND_SIZE = KEY_UNIT * 0.3;
 
 // colors
 const KB_BG = "#2a2218";
@@ -138,10 +138,20 @@ function renderKey(key: string, x: number, y: number) {
 }
 
 export default function Keyboard() {
-  const specs = [
+  const tags = [
     build.current.layout,
-    build.current.switch,
     build.current.plate,
+    build.current.color,
+    build.current.date,
+  ];
+
+  const rightFields = [
+    { label: "STABS", value: build.current.stabs },
+    { label: "KEYCAPS", value: build.current.keycaps },
+    { label: "SWITCH", value: build.current.switch },
+    { label: "SPRINGS", value: build.current.springs },
+    { label: "MODS", value: build.current.mods },
+    { label: "SOUND", value: build.current.sound },
   ];
 
   const elements: React.ReactNode[] = [];
@@ -171,7 +181,11 @@ export default function Keyboard() {
 
   MAIN_ROWS.forEach((row, ri) => {
     let x = SIDE_BEZEL;
-    const y = TOP_BEZEL + (KEY_UNIT + KEY_GAP) + F_ROW_SPACING + ri * (KEY_UNIT + KEY_GAP);
+    const y =
+      TOP_BEZEL +
+      (KEY_UNIT + KEY_GAP) +
+      F_ROW_SPACING +
+      ri * (KEY_UNIT + KEY_GAP);
     row.forEach((key) => {
       elements.push(renderKey(key, x, y));
       x += keyWidth(key) + KEY_GAP;
@@ -180,7 +194,11 @@ export default function Keyboard() {
 
   RIGHT_ROWS.forEach((row, ri) => {
     let x = RIGHT_CLUSTER_X;
-    const y = TOP_BEZEL + (KEY_UNIT + KEY_GAP) + F_ROW_SPACING + (RIGHT_ROW_START + ri) * (KEY_UNIT + KEY_GAP);
+    const y =
+      TOP_BEZEL +
+      (KEY_UNIT + KEY_GAP) +
+      F_ROW_SPACING +
+      (RIGHT_ROW_START + ri) * (KEY_UNIT + KEY_GAP);
     row.forEach((key) => {
       elements.push(renderKey(key, x, y));
       x += keyWidth(key) + KEY_GAP;
@@ -190,84 +208,108 @@ export default function Keyboard() {
   ARROW_ROWS.forEach((row, ri) => {
     let x = RIGHT_CLUSTER_X;
     if (ri === 0) x += KEY_UNIT + KEY_GAP;
-    const y = TOP_BEZEL + (KEY_UNIT + KEY_GAP) + F_ROW_SPACING + (3 + ri) * (KEY_UNIT + KEY_GAP);
+    const y =
+      TOP_BEZEL +
+      (KEY_UNIT + KEY_GAP) +
+      F_ROW_SPACING +
+      (3 + ri) * (KEY_UNIT + KEY_GAP);
     row.forEach((key) => {
       elements.push(renderKey(key, x, y));
       x += keyWidth(key) + KEY_GAP;
     });
   });
 
-  const VB_HEIGHT = TOP_BEZEL * 2 + (KEY_UNIT + KEY_GAP) + F_ROW_SPACING + MAIN_ROWS.length * (KEY_UNIT + KEY_GAP) - KEY_GAP;
+  const VB_HEIGHT =
+    TOP_BEZEL * 2 +
+    (KEY_UNIT + KEY_GAP) +
+    F_ROW_SPACING +
+    MAIN_ROWS.length * (KEY_UNIT + KEY_GAP) -
+    KEY_GAP;
 
   return (
-    <div className="rounded-xl border-2 border-accent bg-card p-6 flex flex-col gap-4 h-full">
-      {/* top: name + specs */}
-      <div className="flex items-center justify-between">
-        <h2 className="text-text-primary font-semibold">Current build: {build.current.name}</h2>
-        <div className="flex gap-2 flex-wrap justify-end">
-          {specs.map((s) => (
-            <span key={s} className="text-xs px-2 py-0.5 rounded-full bg-accent-bg text-accent border border-accent-dark">
-              {s}
-            </span>
-          ))}
+    <div className="rounded-xl border-2 border-accent bg-card p-6 flex flex-col gap-3 h-full">
+      {/* top row: name + tags left, typing test right */}
+      <div className="flex items-start justify-between gap-4">
+        <div className="flex flex-col gap-1.5">
+          <p className="text-[10px] text-text-dim tracking-widest leading-none">
+            CURRENT BUILD
+          </p>
+          <div className="flex items-center gap-2 flex-wrap">
+            <h2 className="text-text-primary font-semibold leading-tight">
+              {build.current.name}
+            </h2>
+            <div className="flex gap-1.5 flex-wrap">
+              {tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="text-xs px-2 py-0.5 rounded-full bg-accent-bg text-accent border border-accent-dark whitespace-nowrap"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div
+          className="rounded-lg px-3 py-2 flex flex-col gap-1 cursor-pointer group shrink-0"
+          style={{
+            backgroundColor: "var(--accent-bg)",
+            border: "1px solid var(--accent-dark)",
+          }}
+        >
+          <p className="text-xs text-accent tracking-widest">TYPING TEST</p>
+          <p className="text-xs text-text-secondary group-hover:text-text-primary transition-colors">
+            try a quote from my media →
+          </p>
         </div>
       </div>
 
-      {/* keyboard left, details right */}
-      <div className="flex gap-6 flex-1">
-
-        {/* keyboard SVG */}
+      {/* keyboard + details as a single aligned row */}
+      <div className="flex gap-6 flex-1 min-h-0">
         <div className="shrink-0 w-[55%]">
           <svg
             viewBox={`0 0 ${VB_WIDTH} ${VB_HEIGHT}`}
-            className="w-full h-auto block"
+            className="w-full h-full block"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <rect x={0} y={0} width={VB_WIDTH} height={VB_HEIGHT} rx={6} fill={KB_BG} stroke={KB_OUTLINE} strokeWidth={KEY_STROKE * 1.5} />
+            <rect
+              x={0}
+              y={0}
+              width={VB_WIDTH}
+              height={VB_HEIGHT}
+              rx={6}
+              fill={KB_BG}
+              stroke={KB_OUTLINE}
+              strokeWidth={KEY_STROKE * 1.5}
+            />
             {elements}
           </svg>
         </div>
 
-        {/* right side: build notes + typing prompt */}
-        <div className="flex flex-col justify-between flex-1 min-w-0">
-
-          {/* build details */}
-          <div className="flex flex-col gap-3">
-            {[
-              { label: "KEYCAPS", value: build.current.keycaps },
-              { label: "MODS", value: build.current.mods },
-              { label: "SOUND", value: build.current.sound },
-              { label: "BUILT", value: build.current.date },
-            ].map(({ label, value }) => (
-              <div key={label}>
-                <p className="text-xs text-text-dim tracking-widest mb-0.5">{label}</p>
-                <p className="text-xs text-text-secondary leading-snug">{value}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* typing test prompt */}
-          <div
-            className="rounded-lg p-3 flex flex-col gap-2 cursor-pointer group"
-            style={{ backgroundColor: "var(--accent-bg)", border: "1px solid var(--accent-dark)" }}
-            // onClick for typing game to implement later
-          >
-            <p className="text-xs text-accent tracking-widest">TYPING TEST</p>
-            <p className="text-xs text-text-secondary leading-relaxed group-hover:text-text-primary transition-colors">
-              {/* pull first quote from quotes.json here when implemented */}
-              Try typing a quote from what I&apos;m currently reading
-            </p>
-          </div>
-
+        {/* details — centered to SVG via flex on the same row */}
+        <div className="flex flex-col justify-center flex-1 min-w-0 gap-3">
+          {rightFields.map(({ label, value }) => (
+            <div key={label}>
+              <p className="text-xs text-text-dim tracking-widest mb-0.5">
+                {label}
+              </p>
+              <p className="text-xs text-text-secondary leading-snug">
+                {value}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
 
-      {/* footer */}
       {build.current.photos.length > 0 && (
         <div className="flex gap-2">
           {build.current.photos.map((url, i) => (
             <a key={i} href={url} target="_blank" rel="noopener noreferrer">
-              <FiCamera size={14} className="text-text-dim hover:text-accent transition-colors" />
+              <FiCamera
+                size={14}
+                className="text-text-dim hover:text-accent transition-colors"
+              />
             </a>
           ))}
         </div>
