@@ -3,3 +3,4 @@ export { default as Links } from "./Links";
 export { default as CurrentlyInto } from "./CurrentlyInto";
 export { default as Projects } from "./Projects";
 export { default as Keyboard } from "./Keyboard";
+export { default as Spotify } from "./Spotify";

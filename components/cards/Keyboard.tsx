@@ -287,7 +287,7 @@ export default function Keyboard() {
           </svg>
         </div>
 
-        {/* details — centered to SVG via flex on the same row */}
+        {/* details centered to SVG on same row */}
         <div className="flex flex-col justify-center flex-1 min-w-0 gap-3">
           {rightFields.map(({ label, value }) => (
             <div key={label}>

@@ -1,4 +1,4 @@
-import { Name, Links, CurrentlyInto, Projects, Keyboard } from "@/components/cards";
+import { Name, Links, CurrentlyInto, Projects, Keyboard, Spotify } from "@/components/cards";
 
 export default function Home() {
   return (
@@ -12,7 +12,9 @@ export default function Home() {
       <div style={{ gridColumn: "1 / 3", gridRow: "1" }}>
         <Name />
       </div>
-      <div style={{ gridColumn: "3", gridRow: "1" }} className="rounded-xl border border-card-border bg-card p-4">Spotify</div>
+      <div style={{ gridColumn: "3", gridRow: "1" }}>
+        <Spotify />
+      </div>
       <div style={{ gridColumn: "1", gridRow: "2" }}>
         <Links />
       </div>
