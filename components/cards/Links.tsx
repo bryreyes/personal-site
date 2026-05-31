@@ -47,7 +47,7 @@ export default function Links() {
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-3 text-text-secondary hover:text-text-primary transition-colors"
+            className="flex items-center gap-3 text-text-secondary hover:text-accent transition-colors"
           >
             <Icon size={20} className="text-accent shrink-0" />
             <span className="text-xl">{label}</span>
