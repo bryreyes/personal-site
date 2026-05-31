@@ -5,21 +5,32 @@
       "description": "Automated fruit fly behavioral analysis for genetics research using computer vision",
       "status": "Completed",
       "url": "/not-live",
-      "live": false
+      "live": false,
+      "stack": ["Python", "OpenCV", "NumPy", "Pandas", "Tkinter"]
     },
     {
       "name": "Spotify Playlist Commit Graph",
       "description": "Visualizes collaborative playlist additions as a GitHub-style contribution graph",
       "status": "Live",
       "url": "https://playlist-commits.vercel.app/",
-      "live": true
+      "live": true,
+      "stack": ["React", "Vite", "Tailwind CSS", "Spotify API", "Vercel"]
     },
     {
       "name": "LLM Cloud Deployment & Cost Benchmarking",
       "description": "Benchmarked CPU-only LLM inference on GKE to measure real-world throughput, latency, and cost",
       "status": "Completed",
       "url": "/not-live",
-      "live": false
+      "live": false,
+      "stack": ["GCP", "GKE", "k6", "Docker", "Git", "Python"]
+    },
+    {
+      "name": "Personal Portfolio Site",
+      "description": "Bento-style personal site with live Spotify integration and interactive keyboard build showcase",
+      "status": "In Progress",
+      "url": "/not-live",
+      "live": false,
+      "stack": ["Next.js", "Tailwind CSS", "Vercel", "Spotify API"]
     }
   ]
 }
