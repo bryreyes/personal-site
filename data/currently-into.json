@@ -3,14 +3,30 @@
     {
       "label": "Currently Reading",
       "title": "The Name of the Wind",
-      "subtitle": "Patrick Rothfuss"
+      "subtitle": "Patrick Rothfuss",
+      "favorite": "Project Hail Mary",
+      "favoriteSub": "Andy Weir"
     },
-    { "label": "Recently Watched", "title": "Goodfellas", "subtitle": "4/5" },
+    {
+      "label": "Recently Watched",
+      "title": "Goodfellas",
+      "subtitle": "4/5",
+      "favorite": "Lord of the Rings",
+      "favoriteSub": "Peter Jackson"
+    },
     {
       "label": "Currently Building",
       "title": "This website",
-      "subtitle": "Suggestions welcome"
+      "subtitle": "Suggestions welcome",
+      "favorite": "Spotify Playlist Commits",
+      "favoriteSub": "Most fun to build"
     },
-    { "label": "Recently Learned", "title": "Filler", "subtitle": "Context" }
+    {
+      "label": "Currently Learning",
+      "title": "Next.js/Tailwind",
+      "subtitle": "For this website",
+      "favorite": "Operating Systems",
+      "favoriteSub": "One of my favorite classes. Weird, I know."
+    }
   ]
 }

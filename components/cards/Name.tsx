@@ -1,7 +1,7 @@
 const tags = [
+  "San Diego, CA",
   "CS Grad",
-  "Placeholder, I dont like having empty space here but its hard to put something here the site doesnt already show",
-  "Placeholder Tag 2",
+  "Full Stack",
 ];
 
 export default function Name() {
