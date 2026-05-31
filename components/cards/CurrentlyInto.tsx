@@ -2,7 +2,7 @@ import data from "@/data/currently-into.json";
 
 export default function CurrentlyInto() {
   return (
-    <div className="rounded-xl border border-card-border bg-card p-8 h-full flex flex-col justify-center">
+    <div className="rounded-xl border border-card-border bg-card p-6 h-full flex flex-col justify-center">
       <div className="grid grid-cols-4 gap-6">
         {data.items.map((item) => (
           <div
