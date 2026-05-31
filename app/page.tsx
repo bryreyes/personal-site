@@ -1,4 +1,11 @@
-import { Name, Links, CurrentlyInto, Projects, Keyboard, Spotify } from "@/components/cards";
+import {
+  Name,
+  Links,
+  CurrentlyInto,
+  Projects,
+  Keyboard,
+  Spotify,
+} from "@/components/cards";
 
 export default function Home() {
   return (

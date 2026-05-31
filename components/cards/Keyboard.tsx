@@ -232,7 +232,7 @@ export default function Keyboard() {
       <div className="flex items-start justify-between gap-4">
         <div className="flex flex-col gap-1.5">
           <p className="text-[10px] text-text-dim tracking-widest leading-none">
-            CURRENT BUILD
+            CURRENT KEYBOARD
           </p>
           <div className="flex items-center gap-2 flex-wrap">
             <h2 className="text-text-primary font-semibold leading-tight">
@@ -258,9 +258,9 @@ export default function Keyboard() {
             border: "1px solid var(--accent-dark)",
           }}
         >
-          <p className="text-xs text-accent tracking-widest">TYPING TEST</p>
-          <p className="text-xs text-text-secondary group-hover:text-text-primary transition-colors">
-            try a quote from my media →
+          <p className="text-xs text-text-dim tracking-widest">TYPING TEST</p>
+          <p className="text-xs text-text-secondary group-hover:text-accent transition-colors">
+            try a quote from my media
           </p>
         </div>
       </div>
