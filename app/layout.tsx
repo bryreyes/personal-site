@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
+import MobileOverlay from "@/components/MobileOverlay";
+
 
 export const metadata: Metadata = {
   title: "Bryson Reyes",
@@ -16,6 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen p-4 md:p-6">
+        <MobileOverlay />
         {children}
         <Analytics />
         <SpeedInsights />
