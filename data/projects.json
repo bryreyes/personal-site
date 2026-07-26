@@ -6,7 +6,9 @@
       "status": "Completed",
       "url": "/not-live",
       "live": false,
-      "stack": ["Python", "OpenCV", "NumPy", "Pandas", "Tkinter"]
+      "github": "/not-live",
+      "stack": ["Python", "OpenCV", "NumPy", "Pandas", "Tkinter"],
+      "date": "Jan 2026"
     },
     {
       "name": "Spotify Playlist Commit Graph",
@@ -14,7 +16,10 @@
       "status": "Live",
       "url": "https://playlist-commits.vercel.app/",
       "live": true,
-      "stack": ["React", "Vite", "Tailwind CSS", "Spotify API", "Vercel"]
+      "github": "https://github.com/bryreyes/SpotifyPlaylistCommits",
+      "stack": ["React", "Vite", "Tailwind CSS", "Spotify API", "Vercel"],
+      "date": "Dec 2025"
+
     },
     {
       "name": "LLM Cloud Deployment & Cost Benchmarking",
@@ -22,15 +27,19 @@
       "status": "Completed",
       "url": "/not-live",
       "live": false,
-      "stack": ["GCP", "GKE", "k6", "Docker", "Git", "Python"]
+      "github": "/not-live",
+      "stack": ["GCP", "GKE", "k6", "Docker", "Git", "Python"],
+      "date": "Mar 2026"
     },
     {
       "name": "Personal Portfolio Site",
       "description": "Bento-style personal site with live Spotify integration and interactive keyboard build showcase",
       "status": "In Progress",
-      "url": "/not-live",
-      "live": false,
-      "stack": ["Next.js", "Tailwind CSS", "Vercel", "Spotify API"]
+      "url": "https://brysonreyes.dev",
+      "live": true,
+      "github": "https://github.com/bryreyes/personal-site",
+      "stack": ["Next.js", "Tailwind CSS", "Vercel", "Spotify API"],
+      "date": "May 2026"
     }
   ]
 }

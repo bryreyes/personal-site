@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Personal Portfolio Website
 
-## Getting Started
+A single-page portfolio built as a bento-style grid, with a live Spotify listening card, an interactive mechanical keyboard build, and project details pulled from JSON data files.
 
-First, run the development server:
+**Live:** [brysonreyes.dev](https://brysonreyes.dev/projects)
 
-```bash
+## Why this exists
+
+I wanted a portfolio that shows a little bit about me rather than just a list of projects in a template. I don't typically focus on frontend development, so this site doubled as a way to learn more about React, Next.js, and Tailwind.
+
+## Features
+
+- **Live Spotify integration:** shows what I'm currently listening to in real time
+- **Interactive keyboard build card:** renders my current keyboard layout with per-switch detail (stabs, keycaps, switches, springs, mods, sound profile), built as SVG rather than an image (in progress, typing test integration planned)
+- **Currently Into:** currently reading/watching/building/learning, each paired with an all-time favorite in the same category, pulled from a JSON data file so it's easy to keep current
+- **Projects section:** live status badges (Live / Completed / In Progress), links out to working demos, and a dedicated all-projects page with tech stack breakdowns per project
+- **Bento grid layout:** desktop-first, planning to rebuild for better mobile experience
+- **Not-live routing:** projects without a public demo route to a dedicated page instead of a dead link
+
+## Stack
+
+- **Next.js:** (App Router) routing and structure
+- **Tailwind CSS:** styling
+- **Spotify API:** live listening data
+- **Vercel:** deployment, analytics, speed insights
+
+## What I learned
+
+This was my second project in the React/Next.js ecosystem. Coming from a background heavier in Python and backend/systems work (computer vision, cloud deployment), the biggest difference was thinking in components and state instead of scripts. Working with Tailwind also changed how I think about styling, it took some getting used to but I learned a lot about the efficiency and usefulness.
+
+## Running locally
+
+\`\`\`bash
+git clone https://github.com/bryreyes/personal-site
+cd personal-site
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+\`\`\`
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Add a `.env.local` with Spotify API credentials (SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REFRESH_TOKEN) to run the live listening card locally.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Other projects
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+More of my work is at https://brysonreyes.dev/projects.

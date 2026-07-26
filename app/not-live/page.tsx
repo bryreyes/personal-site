@@ -13,7 +13,7 @@ export default function NotLive() {
           out if you want to know more.
         </p>
         <Link
-          href="/"
+          href="/projects"
           className="inline-flex items-center gap-2 text-xs text-text-dim hover:text-accent transition-colors mt-2"
         >
           <FiArrowLeft size={14} />
