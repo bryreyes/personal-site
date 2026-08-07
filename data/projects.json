@@ -1,10 +1,22 @@
 {
   "projects": [
     {
+      "name": "LLM Cloud Deployment & Cost Benchmarking",
+      "projectId": "llm-cloud-deployment",
+      "description": "Benchmarked CPU-only LLM inference on GKE to measure real-world throughput, latency, and cost",
+      "status": "Completed",
+      "url": "/projects/llm-cloud-deployment",
+      "live": false,
+      "github": "/not-live",
+      "stack": ["GCP", "GKE", "k6", "Docker", "Git", "Python"],
+      "date": "Mar 2026"
+    },
+    {
       "name": "Fruit Fly Behavioral Tracking System",
+      "projectId": "fruit-fly-tracker",
       "description": "Automated fruit fly behavioral analysis for genetics research using computer vision",
       "status": "Completed",
-      "url": "/not-live",
+      "url": "/projects/fruit-fly-tracker",
       "live": false,
       "github": "/not-live",
       "stack": ["Python", "OpenCV", "NumPy", "Pandas", "Tkinter"],
@@ -12,6 +24,7 @@
     },
     {
       "name": "Spotify Playlist Commit Graph",
+      "projectId": "playlist-commits",
       "description": "Visualizes collaborative playlist additions as a GitHub-style contribution graph",
       "status": "Live",
       "url": "https://playlist-commits.vercel.app/",
@@ -19,20 +32,10 @@
       "github": "https://github.com/bryreyes/SpotifyPlaylistCommits",
       "stack": ["React", "Vite", "Tailwind CSS", "Spotify API", "Vercel"],
       "date": "Dec 2025"
-
-    },
-    {
-      "name": "LLM Cloud Deployment & Cost Benchmarking",
-      "description": "Benchmarked CPU-only LLM inference on GKE to measure real-world throughput, latency, and cost",
-      "status": "Completed",
-      "url": "/not-live",
-      "live": false,
-      "github": "/not-live",
-      "stack": ["GCP", "GKE", "k6", "Docker", "Git", "Python"],
-      "date": "Mar 2026"
     },
     {
       "name": "Personal Portfolio Site",
+      "projectId": "personal-site",
       "description": "Bento-style personal site with live Spotify integration and interactive keyboard build showcase",
       "status": "In Progress",
       "url": "https://brysonreyes.dev",
