@@ -1,0 +1,28 @@
+{
+  "favorites": [
+    { "title": "Project Hail Mary", "year": 2026 },
+    { "title": "The Hobbit: An Unexpected Journey", "year": 2012 },
+    { "title": "Inception", "year": 2010 },
+    { "title": "Cars", "year": 2006 },
+    { "title": "The Lord of the Rings: The Return of the King", "year": 2003 },
+    { "title": "The Lord of the Rings: The Two Towers", "year": 2002 },
+    { "title": "The Lord of the Rings: The Fellowship of the Ring", "year": 2001 },
+    { "title": "12 Angry Men", "year": 1957 },
+    { "title": "The Sheep Detectives", "year": 2026 },
+    { "title": "Spider-Man: Across the Spider-Verse", "year": 2023 },
+    { "title": "Avengers: Infinity War", "year": 2018 },
+    { "title": "Black Panther", "year": 2018 },
+    { "title": "Arrival", "year": 2016 },
+    { "title": "La La Land", "year": 2016 },
+    { "title": "Creed", "year": 2015 },
+    { "title": "The Big Short", "year": 2015 },
+    { "title": "Whiplash", "year": 2014 },
+    { "title": "The Wolf of Wall Street", "year": 2013 },
+    { "title": "The Hobbit: The Desolation of Smaug", "year": 2013 },
+    { "title": "The Dark Knight", "year": 2008 },
+    { "title": "Kung Fu Panda", "year": 2008 },
+    { "title": "Harry Potter and the Goblet of Fire", "year": 2005 },
+    { "title": "The Princess Bride", "year": 1987 },
+    { "title": "Rear Window", "year": 1954 }
+  ]
+}

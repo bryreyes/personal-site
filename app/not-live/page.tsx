@@ -1,5 +1,11 @@
 import Link from "next/link";
 import { FiArrowLeft } from "react-icons/fi";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Not live yet",
+  robots: { index: false },
+};
 
 export default function NotLive() {
   return (

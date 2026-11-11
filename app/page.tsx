@@ -9,29 +9,25 @@ import {
 
 export default function Home() {
   return (
-    <main
-      className="grid gap-2.5"
-      style={{
-        gridTemplateColumns: "0.55fr 1.2fr 0.8fr",
-        gridTemplateRows: "auto auto auto",
-      }}
-    >
-      <div style={{ gridColumn: "1 / 3", gridRow: "1" }}>
+    // single column below lg; 3 columns from lg up (rows: Name + Spotify,
+    // Links + Keyboard, Currently Into + Projects)
+    <main className="grid gap-2.5 grid-cols-1 lg:grid-cols-[0.55fr_1.2fr_0.8fr]">
+      <div className="lg:col-span-2">
         <Name />
       </div>
-      <div style={{ gridColumn: "3", gridRow: "1" }}>
+      <div>
         <Spotify />
       </div>
-      <div style={{ gridColumn: "1", gridRow: "2" }}>
+      <div>
         <Links />
       </div>
-      <div style={{ gridColumn: "2 / 4", gridRow: "2" }}>
+      <div className="lg:col-span-2">
         <Keyboard />
       </div>
-      <div style={{ gridColumn: "1 / 3", gridRow: "3 / 4" }}>
+      <div className="lg:col-span-2">
         <CurrentlyInto />
       </div>
-      <div style={{ gridColumn: "3", gridRow: "3" }}>
+      <div>
         <Projects />
       </div>
     </main>

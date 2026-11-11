@@ -1,0 +1,153 @@
+{
+  "personalBestWpm": 185,
+  "items": [
+    {
+      "type": "book",
+      "title": "The Name of the Wind",
+      "quotes": [
+        "It's like everyone tells a story about themselves inside their own head.",
+        "Words are pale shadows of forgotten names."
+      ]
+    },
+    {
+      "type": "movie",
+      "title": "The Lord of the Rings",
+      "quotes": [
+        "All we have to decide is what to do with the time that is given to us.",
+        "Even the smallest person can change the course of the future.",
+        "There's some good in this world, Mr. Frodo, and it's worth fighting for.",
+        "I can't carry it for you, but I can carry you!"
+      ]
+    },
+    {
+      "type": "book",
+      "title": "The Odyssey",
+      "quotes": [
+        "Tell me, O muse, of that ingenious hero who travelled far and wide after he had sacked the famous town of Troy."
+      ]
+    },
+    {
+      "type": "movie",
+      "title": "The Hobbit",
+      "quotes": [
+        "The world is not in your books and maps. It's out there.",
+        "True courage is about knowing not when to take a life, but when to spare one.",
+        "I am fire. I am death."
+      ]
+    },
+    {
+      "type": "movie",
+      "title": "Inception",
+      "quotes": [
+        "You mustn't be afraid to dream a little bigger, darling."
+      ]
+    },
+    {
+      "type": "movie",
+      "title": "Cars",
+      "quotes": [
+        "Speed. I am speed.",
+        "Float like a Cadillac, sting like a Beemer."
+      ]
+    },
+    {
+      "type": "movie",
+      "title": "12 Angry Men",
+      "quotes": [
+        "It's always difficult to keep personal prejudice out of a thing like this."
+      ]
+    },
+    {
+      "type": "movie",
+      "title": "Spider-Man: Across the Spider-Verse",
+      "quotes": [
+        "Everyone keeps telling me how my story is supposed to go. Nah. I'ma do my own thing."
+      ]
+    },
+    {
+      "type": "movie",
+      "title": "Avengers: Infinity War",
+      "quotes": [
+        "Perfectly balanced, as all things should be."
+      ]
+    },
+    {
+      "type": "movie",
+      "title": "Black Panther",
+      "quotes": [
+        "In times of crisis, the wise build bridges, while the foolish build barriers."
+      ]
+    },
+    {
+      "type": "movie",
+      "title": "Arrival",
+      "quotes": [
+        "Despite knowing the journey and where it leads, I embrace it. And I welcome every moment of it."
+      ]
+    },
+    {
+      "type": "movie",
+      "title": "La La Land",
+      "quotes": [
+        "Here's to the ones who dream, foolish as they may seem."
+      ]
+    },
+    {
+      "type": "movie",
+      "title": "Creed",
+      "quotes": [
+        "One step at a time. One punch at a time. One round at a time."
+      ]
+    },
+    {
+      "type": "movie",
+      "title": "The Big Short",
+      "quotes": [
+        "Truth is like poetry. And most people hate poetry."
+      ]
+    },
+    {
+      "type": "movie",
+      "title": "Whiplash",
+      "quotes": [
+        "There are no two words in the English language more harmful than good job."
+      ]
+    },
+    {
+      "type": "movie",
+      "title": "The Dark Knight",
+      "quotes": [
+        "You either die a hero, or you live long enough to see yourself become the villain."
+      ]
+    },
+    {
+      "type": "movie",
+      "title": "Kung Fu Panda",
+      "quotes": [
+        "Yesterday is history, tomorrow is a mystery, but today is a gift. That is why it is called the present.",
+        "There is no secret ingredient. It's just you."
+      ]
+    },
+    {
+      "type": "movie",
+      "title": "Harry Potter and the Goblet of Fire",
+      "quotes": [
+        "Dark and difficult times lie ahead. Soon we must all face the choice between what is right and what is easy."
+      ]
+    },
+    {
+      "type": "movie",
+      "title": "The Princess Bride",
+      "quotes": [
+        "Hello. My name is Inigo Montoya. You killed my father. Prepare to die."
+      ]
+    },
+    {
+      "type": "movie",
+      "title": "Rear Window",
+      "quotes": [
+        "We've become a race of Peeping Toms."
+      ]
+    }
+  ]
+}

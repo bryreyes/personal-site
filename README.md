@@ -2,7 +2,7 @@
 
 A single-page portfolio built as a bento-style grid, with a live Spotify listening card, an interactive mechanical keyboard build, and project details pulled from JSON data files.
 
-**Live:** [brysonreyes.dev](https://brysonreyes.dev/projects)
+**Live:** [brysonreyes.dev](https://brysonreyes.dev)
 
 ## Why this exists
 

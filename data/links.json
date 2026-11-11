@@ -1,0 +1,23 @@
+{
+  "links": [
+    { "icon": "github", "label": "GitHub", "href": "https://github.com/bryreyes" },
+    {
+      "icon": "linkedin",
+      "label": "LinkedIn",
+      "href": "https://www.linkedin.com/in/bryson-r-967a8127a/"
+    },
+    { "icon": "email", "label": "Email", "href": "mailto:brysonreyes03@gmail.com" },
+    { "icon": "resume", "label": "Resume", "href": "/BrysonReyes Resume.pdf" }
+  ],
+  "stack": [
+    "Python",
+    "Computer Vision",
+    "GCP",
+    "Kubernetes",
+    "Docker",
+    "React",
+    "Next.js",
+    "Tailwind CSS",
+    "REST APIs"
+  ]
+}

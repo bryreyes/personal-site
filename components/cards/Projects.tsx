@@ -1,9 +1,13 @@
-import { FiExternalLink } from "react-icons/fi";
-import data from "@/data/projects.json";
+import Link from "next/link";
+import { FiArrowRight, FiExternalLink } from "react-icons/fi";
+import { getSiteData } from "@/lib/site-data";
+import StatusBadge from "@/components/StatusBadge";
 
-export default function Projects() {
+export default async function Projects() {
+  const data = await getSiteData("projects");
+
   return (
-    <div className="rounded-xl border border-card-border bg-card p-6 flex flex-col gap-4">
+    <div className="bento-card rounded-xl border border-card-border bg-card p-6 flex flex-col gap-4">
       <span className="text-xs text-text-dim tracking-widest">MY PROJECTS</span>
       {data.projects.slice(0, 3).map((project) => (
         <div key={project.name} className="flex flex-col gap-1">
@@ -12,34 +16,29 @@ export default function Projects() {
               {project.name}
             </span>
             <div className="flex items-center gap-2">
-              <span
-                className={`text-xs px-2 py-0.5 rounded-full ${
-                  project.status === "Live"
-                    ? "bg-accent-bg text-accent border border-accent-dark"
-                    : project.status === "Completed"
-                    ? "bg-green-950 text-green-400 border border-green-800"
-                    : "bg-card border border-card-border text-text-secondary"
-                }`}
+              <StatusBadge status={project.status} />
+              <Link
+                href={project.url}
+                target={project.live ? "_blank" : undefined}
+                rel={project.live ? "noopener noreferrer" : undefined}
               >
-                {project.status}
-              </span>
-              <a href={project.url} target="_blank" rel="noopener noreferrer">
                 <FiExternalLink
                   size={14}
                   className="text-text-dim hover:text-accent transition-colors"
                 />
-              </a>
+              </Link>
             </div>
           </div>
           <p className="text-xs text-text-secondary">{project.description}</p>
         </div>
       ))}
-      <a
+      <Link
         href="/projects"
-        className="text-xs text-text-dim hover:text-accent transition-colors mt-auto"
+        className="inline-flex items-center gap-2 text-xs text-text-dim hover:text-accent transition-colors mt-auto"
       >
         See all projects
-      </a>
+        <FiArrowRight size={14} />
+      </Link>
     </div>
   );
 }

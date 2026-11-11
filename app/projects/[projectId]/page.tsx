@@ -1,11 +1,26 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { FiArrowLeft } from "react-icons/fi";
-import data from "@/data/projects.json";
+import { getSiteData } from "@/lib/site-data";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import ReactMarkdown from "react-markdown";
+import type { Metadata } from "next";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ projectId: string }>;
+}): Promise<Metadata> {
+  const { projectId } = await params;
+  const data = await getSiteData("projects");
+  const project = data.projects.find((p) => p.projectId === projectId);
+
+  if (!project) return {};
+
+  return { title: project.name, description: project.description };
+}
 
 export default async function ProjectWriteup({
   params,
@@ -13,6 +28,7 @@ export default async function ProjectWriteup({
   params: Promise<{ projectId: string }>;
 }) {
   const { projectId } = await params;
+  const data = await getSiteData("projects");
   const project = data.projects.find((p) => p.projectId === projectId);
 
   if (!project) notFound();

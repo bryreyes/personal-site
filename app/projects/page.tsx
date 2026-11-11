@@ -1,8 +1,17 @@
 import Link from "next/link";
 import { FiArrowLeft, FiExternalLink, FiGithub } from "react-icons/fi";
-import data from "@/data/projects.json";
+import { getSiteData } from "@/lib/site-data";
+import StatusBadge from "@/components/StatusBadge";
+import type { Metadata } from "next";
 
-export default function ProjectsPage() {
+export const metadata: Metadata = {
+  title: "Projects",
+  description: "Things I've built: cloud, computer vision, and web projects.",
+};
+
+export default async function ProjectsPage() {
+  const data = await getSiteData("projects");
+
   return (
     <main className="min-h-screen bg-bg text-text-primary px-6 py-16 max-w-2xl mx-auto">
       <Link href="/" className="inline-flex items-center gap-2 text-xs text-text-dim hover:text-accent transition-colors mb-8">
@@ -25,17 +34,7 @@ export default function ProjectsPage() {
                 <span className="text-xs text-text-dim">{project.date}</span>
               </div>
               <div className="flex items-center gap-3 shrink-0">
-                <span
-                  className={`text-xs px-2 py-0.5 rounded-full ${
-                    project.status === "Live"
-                      ? "bg-accent-bg text-accent border border-accent-dark"
-                      : project.status === "Completed"
-                      ? "bg-green-950 text-green-400 border border-green-800"
-                      : "bg-card border border-card-border text-text-secondary"
-                  }`}
-                >
-                  {project.status}
-                </span>
+                <StatusBadge status={project.status} />
                 <Link 
                   href={project.github}
                   target={project.github.startsWith("http") ? "_blank" : undefined}

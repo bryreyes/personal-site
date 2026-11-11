@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <!-- amber keycap with a dark B (default theme: accent-dark, accent, bg) -->
+  <rect x="1" y="1" width="30" height="30" rx="7" fill="#7a5828"/>
+  <rect x="2.5" y="2" width="27" height="25" rx="6" fill="#a07840"/>
+  <text x="16" y="15" text-anchor="middle" dominant-baseline="central" font-size="19" font-weight="700" font-family="ui-monospace, Consolas, monospace" fill="#1a1814">B</text>
+</svg>

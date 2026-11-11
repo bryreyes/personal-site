@@ -1,9 +1,11 @@
-import data from "@/data/currently-into.json";
+import { getSiteData } from "@/lib/site-data";
 
-export default function CurrentlyInto() {
+export default async function CurrentlyInto() {
+  const data = await getSiteData("currently-into");
+
   return (
-    <div className="rounded-xl border border-card-border bg-card p-6 h-full flex flex-col justify-center">
-      <div className="grid grid-cols-4 gap-6">
+    <div className="bento-card rounded-xl border border-card-border bg-card p-6 h-full flex flex-col justify-center">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
         {data.items.map((item) => (
           <div
             key={item.label}
@@ -11,7 +13,7 @@ export default function CurrentlyInto() {
           >
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-accent shrink-0" />
-              <span className="text-base text-text-dim tracking-widest">
+              <span className="text-sm xl:text-base text-text-dim tracking-widest">
                 {item.label}
               </span>
             </div>

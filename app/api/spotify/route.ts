@@ -1,29 +1,20 @@
-const TOKEN_ENDPOINT = "https://accounts.spotify.com/api/token";
+import { getAccessToken } from "@/lib/spotify";
+
 const NOW_PLAYING_ENDPOINT = "https://api.spotify.com/v1/me/player/currently-playing";
 const RECENTLY_PLAYED_ENDPOINT = "https://api.spotify.com/v1/me/player/recently-played?limit=1";
 
-async function getAccessToken() {
-  const basic = Buffer.from(
-    `${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`
-  ).toString("base64");
-
-  const res = await fetch(TOKEN_ENDPOINT, {
-    method: "POST",
-    headers: {
-      Authorization: `Basic ${basic}`,
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-    body: new URLSearchParams({
-      grant_type: "refresh_token",
-      refresh_token: process.env.SPOTIFY_REFRESH_TOKEN!,
-    }),
-  });
-
-  return res.json();
+export async function GET() {
+  try {
+    return await getTrack();
+  } catch (err) {
+    // server-side log only; the card keeps its last track or shows its empty state
+    console.error("spotify:", err instanceof Error ? err.message : err);
+    return Response.json(null, { status: 502 });
+  }
 }
 
-export async function GET() {
-  const { access_token } = await getAccessToken();
+async function getTrack() {
+  const access_token = await getAccessToken();
 
   const nowPlayingRes = await fetch(NOW_PLAYING_ENDPOINT, {
     headers: { Authorization: `Bearer ${access_token}` },
@@ -34,6 +25,8 @@ export async function GET() {
   if (nowPlayingRes.status === 204) {
     return await getRecentlyPlayed(access_token);
   }
+
+  if (!nowPlayingRes.ok) throw new Error(`now playing failed (${nowPlayingRes.status})`);
 
   const data = await nowPlayingRes.json();
 
@@ -57,8 +50,10 @@ async function getRecentlyPlayed(access_token: string) {
     next: { revalidate: 30 },
   });
 
+  if (!res.ok) throw new Error(`recently played failed (${res.status})`);
+
   const data = await res.json();
-  const track = data.items[0]?.track;
+  const track = data.items?.[0]?.track;
 
   if (!track) {
     return Response.json(null);
