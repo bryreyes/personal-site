@@ -1,7 +1,20 @@
-import { FiCamera } from "react-icons/fi";
-import build from "@/data/builds.json";
+import { getSiteData } from "@/lib/site-data";
+import KeyboardLights from "@/components/KeyboardLights";
+import KeyboardCard from "@/components/KeyboardCard";
 
 const LIT_KEYS = new Set(["B", "R", "Y", "S", "O", "N"]);
+
+// GMK-style color roles. Any key not in MOD_KEYS or ACCENT_KEYS is an alpha.
+// To change a key's role, move it between these sets; the colors themselves
+// are per theme in globals.css
+const MOD_KEYS = new Set([
+  "Tab", "Caps", "Shift", "RShift", "Ctrl", "Win", "Alt", "Fn", "Backspace",
+  "F5", "F6", "F7", "F8", "Print", "Scroll", "Pause",
+  "Ins", "Home", "PgUp", "Del", "End", "PgDn", "↑", "←", "↓", "→",
+]);
+
+// a lot of sets give Esc and Enter their own color
+const ACCENT_KEYS = new Set(["Esc", "Enter"]);
 
 // sizing
 const KEY_UNIT = 30;
@@ -24,15 +37,21 @@ const KEY_RADIUS = KEY_UNIT * 0.12;
 const KEY_STROKE = KEY_UNIT * 0.04;
 const LEGEND_SIZE = KEY_UNIT * 0.3;
 
-// colors
-const KB_BG = "#2a2218";
-const KB_OUTLINE = "#4a3a28";
-const KEY_BG = "#322820";
-const KEY_BORDER = "#3e3020";
-const KEY_TEXT = "#745a3e";
-const LIT_BG = "#5a3e1e";
-const LIT_BORDER = "#a07840";
-const LIT_TEXT = "#a07840";
+// colors (change these per theme in globals.css, not here)
+const KB_BG = "var(--color-kb-body)";
+const KB_OUTLINE = "var(--color-kb-outline)";
+const KEY_BG = "var(--color-key-bg)";
+const KEY_BORDER = "var(--color-key-border)";
+const KEY_TEXT = "var(--color-key-text)";
+const LIT_BG = "var(--color-key-lit-bg)";
+const LIT_BORDER = "var(--color-accent)";
+const LIT_TEXT = "var(--color-key-lit-text)";
+const MOD_BG = "var(--color-mod-bg)";
+const MOD_BORDER = "var(--color-mod-border)";
+const MOD_TEXT = "var(--color-mod-text)";
+const ACCENT_KEY_BG = "var(--color-accent-key-bg)";
+const ACCENT_KEY_BORDER = "var(--color-accent-key-border)";
+const ACCENT_KEY_TEXT = "var(--color-accent-key-text)";
 
 const WIDE_KEYS: Record<string, number> = {
   Backspace: 2,
@@ -44,10 +63,8 @@ const WIDE_KEYS: Record<string, number> = {
   "\\": 1.5,
   Space: 7,
   Ctrl: 1.5,
-  RCtrl: 1.5,
   Win: 1,
   Alt: 1.5,
-  RAlt: 1.5,
   Fn: 1,
 };
 
@@ -93,6 +110,54 @@ const RIGHT_ROW_START = 0;
 
 const ARROW_ROWS: string[][] = [["↑"], ["←", "↓", "→"]];
 
+// legend -> the browser's name for the key, so a real key press can light it.
+// letters, numbers and F-keys are handled in keyCode(); any other new key needs an entry
+const KEY_CODES: Record<string, string> = {
+  "`": "Backquote",
+  "-": "Minus",
+  "=": "Equal",
+  Backspace: "Backspace",
+  Tab: "Tab",
+  "[": "BracketLeft",
+  "]": "BracketRight",
+  "\\": "Backslash",
+  Caps: "CapsLock",
+  ";": "Semicolon",
+  "'": "Quote",
+  Enter: "Enter",
+  Shift: "ShiftLeft",
+  RShift: "ShiftRight",
+  ",": "Comma",
+  ".": "Period",
+  "/": "Slash",
+  Ctrl: "ControlLeft",
+  Win: "MetaLeft",
+  Alt: "AltLeft",
+  Space: "Space",
+  Esc: "Escape",
+  Print: "PrintScreen",
+  Scroll: "ScrollLock",
+  Pause: "Pause",
+  Ins: "Insert",
+  Home: "Home",
+  PgUp: "PageUp",
+  Del: "Delete",
+  End: "End",
+  PgDn: "PageDown",
+  "↑": "ArrowUp",
+  "←": "ArrowLeft",
+  "↓": "ArrowDown",
+  "→": "ArrowRight",
+};
+
+function keyCode(key: string, rightSide: boolean) {
+  if (/^[A-Z]$/.test(key)) return `Key${key}`;
+  if (/^[0-9]$/.test(key)) return `Digit${key}`;
+  if (/^F\d+$/.test(key)) return key;
+  const code = KEY_CODES[key];
+  return rightSide && code ? code.replace("Left", "Right") : code;
+}
+
 function rowWidth(row: string[]) {
   return row.reduce((total, key, index) => {
     return total + keyWidth(key) + (index < row.length - 1 ? KEY_GAP : 0);
@@ -104,20 +169,33 @@ function keyWidth(key: string) {
   return units * KEY_UNIT + (units - 1) * KEY_GAP;
 }
 
-function renderKey(key: string, x: number, y: number) {
+function renderKey(key: string, x: number, y: number, rightSide = false) {
   const width = keyWidth(key);
   const isLit = LIT_KEYS.has(key);
+  const isMod = MOD_KEYS.has(key);
+  const isAccent = ACCENT_KEYS.has(key);
+  const bg = isLit ? LIT_BG : isAccent ? ACCENT_KEY_BG : isMod ? MOD_BG : KEY_BG;
+  const border = isLit ? LIT_BORDER : isAccent ? ACCENT_KEY_BORDER : isMod ? MOD_BORDER : KEY_BORDER;
+  const text = isLit ? LIT_TEXT : isAccent ? ACCENT_KEY_TEXT : isMod ? MOD_TEXT : KEY_TEXT;
 
   return (
-    <g key={`${key}-${x}-${y}`}>
+    <g
+      key={`${key}-${x}-${y}`}
+      className="kb-key"
+      data-key={keyCode(key, rightSide)}
+      // lets a keycap theme color one legend (e.g. Dracula's pink Tab)
+      data-legend={key}
+      // used to stagger the BRYSON wave
+      style={{ "--x": x } as React.CSSProperties}
+    >
       <rect
         x={x}
         y={y}
         width={width}
         height={KEY_UNIT}
         rx={KEY_RADIUS}
-        fill={isLit ? LIT_BG : KEY_BG}
-        stroke={isLit ? LIT_BORDER : KEY_BORDER}
+        fill={bg}
+        stroke={border}
         strokeWidth={KEY_STROKE}
       />
 
@@ -126,7 +204,7 @@ function renderKey(key: string, x: number, y: number) {
         y={y + KEY_UNIT / 2}
         fontSize={LEGEND_SIZE}
         fontFamily="monospace"
-        fill={isLit ? LIT_TEXT : KEY_TEXT}
+        fill={text}
         textAnchor="middle"
         dominantBaseline="middle"
         style={{ userSelect: "none" }}
@@ -137,22 +215,9 @@ function renderKey(key: string, x: number, y: number) {
   );
 }
 
-export default function Keyboard() {
-  const tags = [
-    build.current.layout,
-    build.current.plate,
-    build.current.color,
-    build.current.date,
-  ];
-
-  const rightFields = [
-    { label: "STABS", value: build.current.stabs },
-    { label: "KEYCAPS", value: build.current.keycaps },
-    { label: "SWITCH", value: build.current.switch },
-    { label: "SPRINGS", value: build.current.springs },
-    { label: "MODS", value: build.current.mods },
-    { label: "SOUND", value: build.current.sound },
-  ];
+export default async function Keyboard() {
+  const build = await getSiteData("builds");
+  const quotes = await getSiteData("quotes");
 
   const elements: React.ReactNode[] = [];
 
@@ -186,8 +251,9 @@ export default function Keyboard() {
       (KEY_UNIT + KEY_GAP) +
       F_ROW_SPACING +
       ri * (KEY_UNIT + KEY_GAP);
-    row.forEach((key) => {
-      elements.push(renderKey(key, x, y));
+    row.forEach((key, ki) => {
+      // the bottom row repeats Ctrl / Alt: the second one is the right-hand key
+      elements.push(renderKey(key, x, y, row.indexOf(key) < ki));
       x += keyWidth(key) + KEY_GAP;
     });
   });
@@ -227,93 +293,46 @@ export default function Keyboard() {
     KEY_GAP;
 
   return (
-    <div className="rounded-xl border-2 border-accent bg-card p-6 flex flex-col gap-3 h-full">
-      {/* top row: name + tags left, typing test right */}
-      <div className="flex items-start justify-between gap-4">
-        <div className="flex flex-col gap-1.5">
-          <p className="text-[10px] text-text-dim tracking-widest leading-none">
-            CURRENT KEYBOARD
-          </p>
-          <div className="flex items-center gap-2 flex-wrap">
-            <h2 className="text-text-primary font-semibold leading-tight">
-              {build.current.name}
-            </h2>
-            <div className="flex gap-1.5 flex-wrap">
-              {tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="text-xs px-2 py-0.5 rounded-full bg-accent-bg text-accent border border-accent-dark whitespace-nowrap"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <div
-          className="rounded-lg px-3 py-2 flex flex-col gap-1 cursor-pointer group shrink-0"
-          style={{
-            backgroundColor: "var(--accent-bg)",
-            border: "1px solid var(--accent-dark)",
-          }}
+    // the SVG is built here on the server; KeyboardCard handles everything interactive
+    <KeyboardCard builds={[build.current, ...build.past]} quotes={quotes}>
+      <KeyboardLights className="shrink-0 w-full md:w-[55%]">
+        <svg
+          viewBox={`0 0 ${VB_WIDTH} ${VB_HEIGHT}`}
+          className="w-full h-full block"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          <p className="text-xs text-text-dim tracking-widest">TYPING TEST</p>
-          <p className="text-xs text-text-secondary group-hover:text-accent transition-colors">
-            try a quote from my media
-          </p>
-        </div>
-      </div>
-
-      {/* keyboard + details as a single aligned row */}
-      <div className="flex gap-6 flex-1 min-h-0">
-        <div className="shrink-0 w-[55%]">
-          <svg
-            viewBox={`0 0 ${VB_WIDTH} ${VB_HEIGHT}`}
-            className="w-full h-full block"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <rect
-              x={0}
-              y={0}
-              width={VB_WIDTH}
-              height={VB_HEIGHT}
-              rx={6}
-              fill={KB_BG}
-              stroke={KB_OUTLINE}
-              strokeWidth={KEY_STROKE * 1.5}
-            />
-            {elements}
-          </svg>
-        </div>
-
-        {/* details centered to SVG on same row */}
-        <div className="flex flex-col justify-center flex-1 min-w-0 gap-3">
-          {rightFields.map(({ label, value }) => (
-            <div key={label}>
-              <p className="text-xs text-text-dim tracking-widest mb-0.5">
-                {label}
-              </p>
-              <p className="text-xs text-text-secondary leading-snug">
-                {value}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {build.current.photos.length > 0 && (
-        <div className="flex gap-2">
-          {build.current.photos.map((url, i) => (
-            <a key={i} href={url} target="_blank" rel="noopener noreferrer">
-              <FiCamera
-                size={14}
-                className="text-text-dim hover:text-accent transition-colors"
-              />
-            </a>
-          ))}
-        </div>
-      )}
-    </div>
+          <rect
+            x={0}
+            y={0}
+            width={VB_WIDTH}
+            height={VB_HEIGHT}
+            rx={6}
+            fill={KB_BG}
+            stroke={KB_OUTLINE}
+            strokeWidth={KEY_STROKE * 1.5}
+          />
+          {/* mouse glow, drawn under the keys so it only shows through the gaps.
+              KeyboardLights moves it */}
+          <defs>
+            <radialGradient id="kb-spot" gradientUnits="userSpaceOnUse" cx={0} cy={0} r={KEY_UNIT * 3}>
+              <stop offset="0" style={{ stopColor: "var(--color-accent)", stopOpacity: 0.7 }} />
+              <stop offset="0.5" style={{ stopColor: "var(--color-accent)", stopOpacity: 0.2 }} />
+              <stop offset="1" style={{ stopColor: "var(--color-accent)", stopOpacity: 0 }} />
+            </radialGradient>
+          </defs>
+          <rect
+            className="kb-spotlight"
+            x={0}
+            y={0}
+            width={VB_WIDTH}
+            height={VB_HEIGHT}
+            rx={6}
+            fill="url(#kb-spot)"
+            pointerEvents="none"
+          />
+          {elements}
+        </svg>
+      </KeyboardLights>
+    </KeyboardCard>
   );
 }

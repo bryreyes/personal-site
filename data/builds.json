@@ -6,11 +6,12 @@
     "layout": "TKL",
     "stabs": "Owlstabs V2",
     "keycaps": "GMK BoW",
-    "switch": "Nixies | Krytox205g0",
+    "switches": "Nixies | Krytox205g0",
     "springs": "Geon 22m 57.5g Triple-Stage | Krytox105g0",
     "mods": "Foamless",
     "sound": "Clacky/Scratchy",
     "date": "2025",
     "photos": []
-  }
+  },
+  "past": []
 }

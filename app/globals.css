@@ -13,11 +13,349 @@
   --color-key-bg: #322820;
   --color-key-border: #3e3020;
   --color-kb-body: #2a2218;
+  --color-kb-outline: #4a3a28;
+  --color-key-text: #745a3e;
+  --color-key-lit-bg: #5a3e1e;
+  --color-error: #c0674f;
 }
 
 @plugin "@tailwindcss/typography";
+/* modifier and accent keys (Esc, Enter) match the alphas
+
+*/
+:root,
+[data-theme] {
+  --color-key-lit-text: var(--color-accent);
+  --color-mod-bg: var(--color-key-bg);
+  --color-mod-border: var(--color-key-border);
+  --color-mod-text: var(--color-key-text);
+  --color-accent-key-bg: var(--color-mod-bg);
+  --color-accent-key-border: var(--color-mod-border);
+  --color-accent-key-text: var(--color-mod-text);
+}
+
+/* keycap themes (components/ThemePicker.tsx). Each one overrides the @theme
+   tokens above, set on <html> for the whole site
+*/
+
+/* keys color picked: white alphas, deep green legends and mods, sage
+   Esc/Enter. Mods nudged a little darker and greener than picked. Lit keys
+   are a pale sage so they don't blend into the mods */
+[data-theme="botanical"] {
+  --color-bg: #161917;
+  --color-card: #1e221f;
+  --color-card-border: #333a35;
+  --color-accent: #a3b89a;
+  --color-accent-dark: #5e7358;
+  --color-accent-bg: #232a25;
+  --color-text-primary: #e2e6dc;
+  --color-text-secondary: #6a7268;
+  --color-text-dim: #555c53;
+  --color-key-bg: #e5ebec;
+  --color-key-border: #bcc1c2;
+  --color-kb-body: #222a25;
+  --color-kb-outline: #3a453e;
+  --color-key-text: #3e5450;
+  --color-key-lit-bg: #bdd1b6;
+  --color-key-lit-text: #2e453f;
+  --color-mod-bg: #374b3e;
+  --color-mod-border: #4d6053;
+  --color-mod-text: #68807c;
+  --color-accent-key-bg: #91aba5;
+  --color-accent-key-border: #778c87;
+  --color-accent-key-text: #2e453f;
+}
+
+/* keys color picked: charcoal alphas, dark teal-navy mods, grey-cream mod
+   legends, cream Esc/Enter */
+[data-theme="norse"] {
+  --color-bg: #141518;
+  --color-card: #1c1d21;
+  --color-card-border: #2f3138;
+  --color-accent: #c9bfa8;
+  --color-accent-dark: #3d5560;
+  --color-accent-bg: #1f2a30;
+  --color-text-primary: #e6dfd0;
+  --color-text-secondary: #737580;
+  --color-text-dim: #5b5d66;
+  --color-key-bg: #262626;
+  --color-key-border: #404040;
+  --color-kb-body: #1e1f24;
+  --color-kb-outline: #393a3e;
+  --color-key-text: #b8bcb4;
+  --color-key-lit-bg: #2b3f48;
+  --color-mod-bg: #15262e;
+  --color-mod-border: #314047;
+  --color-mod-text: #a5a593;
+  --color-accent-key-bg: #a5a593;
+  --color-accent-key-border: #85856f;
+  --color-accent-key-text: #15262e;
+}
+
+/* blue-grey from the Dracula theme, grey accent from keys
+   Keys color picked: grey-purple alphas, near-black mods, white legends,
+   some mods with colored legends (below) */
+[data-theme="dracula"] {
+  --color-bg: #1e1f29;
+  --color-card: #282a36;
+  --color-card-border: #44475a;
+  --color-accent: #b3b2cc;
+  --color-accent-dark: #5c5b76;
+  --color-accent-bg: #33344a;
+  --color-text-primary: #f8f8f2;
+  --color-text-secondary: #7f88b8;
+  --color-text-dim: #6272a4;
+  --color-key-bg: #5c5b76;
+  --color-key-border: #706f86;
+  --color-kb-body: #21222c;
+  --color-kb-outline: #44475a;
+  --color-key-text: #eee9e5;
+  --color-key-lit-bg: #44435c;
+  --color-mod-bg: #242437;
+  --color-mod-border: #3e3e4f;
+  --color-mod-text: #f8f8f2;
+  --color-error: #ff5555;
+}
+
+/* :where() keeps these weak enough that a pressed key (rules further down)
+   still gets its pressed colors */
+:where([data-theme="dracula"]) .kb-key:is([data-legend="Esc"], [data-legend="Shift"], [data-legend="RShift"], [data-legend="Fn"]) text {
+  fill: #8be9fd;
+}
+
+:where([data-theme="dracula"]) .kb-key:is([data-legend="Tab"], [data-legend="Win"], [data-legend="Backspace"]) text {
+  fill: #ff79c6;
+}
+
+:where([data-theme="dracula"]) .kb-key:is([data-legend="Caps"], [data-legend="Alt"], [data-legend="Enter"]) text {
+  fill: #bd93f9;
+}
+
+:where([data-theme="dracula"]) .kb-key[data-legend="Ctrl"] text {
+  fill: #f1fa8c;
+}
+
+/* Dracula breaks the usual pattern on the grave key: modifier keycap, alpha legend */
+:where([data-theme="dracula"]) .kb-key[data-legend="`"] rect {
+  fill: var(--color-mod-bg);
+  stroke: var(--color-mod-border);
+}
+
+/* keys color picked: lavender alphas, purple legends, purple mods with
+   light legends */
+[data-theme="frost-witch"] {
+  --color-bg: #15121c;
+  --color-card: #1d1926;
+  --color-card-border: #342d45;
+  --color-accent: #c3b1f0;
+  --color-accent-dark: #5d4a9a;
+  --color-accent-bg: #262036;
+  --color-text-primary: #eeeaf8;
+  --color-text-secondary: #7d7494;
+  --color-text-dim: #625a78;
+  --color-key-bg: #d9ccf0;
+  --color-key-border: #b2a7c5;
+  --color-kb-body: #2a2338;
+  --color-kb-outline: #4a3f63;
+  --color-key-text: #8679a1;
+  --color-key-lit-bg: #5d4a9a;
+  --color-mod-bg: #856fa2;
+  --color-mod-border: #9480ad;
+  --color-mod-text: #f0ebfa;
+}
+
+/* keys color picked: beige alphas, magenta legends, teal mods, yellow
+   Esc/Enter. Light retro beige site (the board it's on), magenta accent
+   since teal text is hard to read on beige */
+[data-theme="analog-dreams"] {
+  --color-bg: #c7bda1;
+  --color-card: #d8cfb7;
+  --color-card-border: #b8ad8f;
+  --color-accent: #663b54;
+  --color-accent-dark: #a8798f;
+  --color-accent-bg: #d0c2b6;
+  --color-text-primary: #2b2229;
+  --color-text-secondary: #66595a;
+  --color-text-dim: #857a70;
+  --color-key-bg: #b2ae93;
+  --color-key-border: #928f79;
+  --color-kb-body: #d8ceb3;
+  --color-kb-outline: #b5ab90;
+  --color-key-text: #663b54;
+  --color-key-lit-bg: #663b54;
+  --color-key-lit-text: #ece5d2;
+  --color-error: #b8432e;
+  --color-mod-bg: #74c0b6;
+  --color-mod-border: #5f9d95;
+  --color-mod-text: #663b54;
+  --color-accent-key-bg: #b8b46a;
+  --color-accent-key-border: #96934f;
+  --color-accent-key-text: #663b54;
+}
+
+/* osume tsukimi: paper gray alphas, black mods with moonlit
+   gold legends, gold Esc/Enter. Alpha and Esc/Enter legends share a reddish
+   umber brown. Black site to match */
+[data-theme="tsukimi"] {
+  --color-bg: #111112;
+  --color-card: #19191b;
+  --color-card-border: #2e2e31;
+  --color-accent: #d9b45f;
+  --color-accent-dark: #8a6d33;
+  --color-accent-bg: #25221c;
+  --color-text-primary: #ece6d8;
+  --color-text-secondary: #85827a;
+  --color-text-dim: #66635d;
+  --color-key-bg: #d6d2c8;
+  --color-key-border: #b3afa5;
+  --color-kb-body: #1b1b1d;
+  --color-kb-outline: #343437;
+  --color-key-text: #8f4c27;
+  --color-key-lit-bg: #6b4a32;
+  --color-mod-bg: #1b1b1d;
+  --color-mod-border: #343437;
+  --color-mod-text: #d9b45f;
+  --color-accent-key-bg: #d9b45f;
+  --color-accent-key-border: #b0903f;
+  --color-accent-key-text: #8f4c27;
+}
+
+/* GMK Minimal (BoW): light theme, last in the list
+   because it is hard on the eyes next to the dark ones */
+[data-theme="minimal"] {
+  --color-bg: #e4e2dd;
+  --color-card: #f4f3f0;
+  --color-card-border: #d2cfc8;
+  --color-accent: #1c1c1c;
+  --color-accent-dark: #a8a49c;
+  --color-accent-bg: #e8e6e1;
+  --color-text-primary: #161616;
+  --color-text-secondary: #5c5a56;
+  --color-text-dim: #85827c;
+  --color-key-bg: #fbfbf9;
+  --color-key-border: #c4c1ba;
+  --color-kb-body: #d6d3cc;
+  --color-kb-outline: #aeaaa2;
+  --color-key-text: #1c1c1c;
+  --color-key-lit-bg: #d8d5ce;
+  --color-error: #b8432e;
+}
+
+/* the picker's "Default" swatch has to undo whatever theme <html> has, so it
+   repeats the default key colors from @theme */
+[data-theme="default"] {
+  --color-key-bg: #322820;
+  --color-key-border: #3e3020;
+  --color-key-text: #745a3e;
+}
 
 body {
   background-color: var(--color-bg);
   color: var(--color-text-primary);
+}
+
+/* keyboard card: keys lit by a physical key press (components/KeyboardLights.tsx).
+   CSS beats the SVG fill/stroke attributes, so no inline colors need to change */
+.kb-key[data-pressed] rect {
+  fill: var(--color-accent-dark);
+  stroke: var(--color-accent);
+}
+
+.kb-key[data-pressed] text {
+  fill: var(--color-text-primary);
+}
+
+/* easter egg: a wave of light left to right, staggered by each key's --x */
+@media (prefers-reduced-motion: no-preference) {
+  [data-wave] .kb-key rect {
+    animation: kb-wave 700ms ease-in-out calc(var(--x) * 1.5ms);
+  }
+}
+
+@keyframes kb-wave {
+  50% {
+    fill: var(--color-accent-dark);
+    stroke: var(--color-accent);
+  }
+}
+
+/* Hero cursor (components/HeroName.tsx): hard on/off blink like an editor */
+@media (prefers-reduced-motion: no-preference) {
+  .caret-blink {
+    animation: caret-blink 1.06s step-end infinite;
+  }
+}
+
+@keyframes caret-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Spotify card border and glow from the album art (Spotify.tsx sets --tint) */
+.album-tint {
+  border-color: rgb(var(--tint) / 0.45);
+}
+
+.album-tint.album-glow {
+  box-shadow: 0 0 36px -10px rgb(var(--tint) / 0.5);
+}
+
+.bento-card {
+  transition:
+    border-color 300ms,
+    box-shadow 300ms;
+}
+
+/* Hover highlight, mouse only. The Keyboard card has the accent border
+   until another card is hovered, then that card takes it
+   keyboard also gets a spotlight that follows the cursor
+*/
+
+@media (hover: hover) {
+  main:has(.bento-card:not(.kb-card):hover) .kb-card {
+    border-color: var(--color-card-border);
+  }
+
+  .bento-card:not(.kb-card):hover {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 1px var(--color-accent);
+  }
+
+  .kb-spotlight {
+    opacity: 0;
+    transition: opacity 300ms;
+  }
+
+  .kb-board:hover .kb-spotlight {
+    opacity: 1;
+  }
+}
+
+@media not (hover: hover) {
+  .kb-spotlight {
+    display: none;
+  }
+}
+
+/* cards fade up one after another on load.
+
+*/
+@media (prefers-reduced-motion: no-preference) {
+  .bento-card {
+    animation: card-in 900ms cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+  }
+
+  main > :nth-child(2) .bento-card { animation-delay: 110ms; }
+  main > :nth-child(3) .bento-card { animation-delay: 220ms; }
+  main > :nth-child(4) .bento-card { animation-delay: 330ms; }
+  main > :nth-child(5) .bento-card { animation-delay: 440ms; }
+  main > :nth-child(6) .bento-card { animation-delay: 550ms; }
+}
+
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
 }
